@@ -25,18 +25,18 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
                 ) {
-                    SwipeableCard(
-                        config = SwipeableCardConfig(
-                            direction = SwipeableCardConfig.Direction.LTR,
-                            maxOffsetToReveal = 200f,
-                            revealThreshold = 50f
-                        ),
-                        modifier = Modifier.fillMaxWidth().height(50.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().height(50.dp).padding(8.dp).background(Color.Black)
+                    Column(modifier = Modifier.fillMaxSize().padding(12.dp)) {
+                        SwipeableCard(
+                            config = SwipeableCardConfig(
+                                direction = SwipeableCardConfig.Direction.LTR,
+                                maxOffsetToReveal = 200f,
+                                revealThreshold = 50f
+                            ),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(50.dp),
+                            color = Color.Blue
                         ) {
 
                         }

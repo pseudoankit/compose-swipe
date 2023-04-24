@@ -6,11 +6,16 @@ import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.unit.Dp
@@ -30,6 +35,8 @@ private const val ANIMATION_DURATION = 500
 fun SwipeableCard(
     config: SwipeableCardConfig,
     modifier: Modifier = Modifier,
+    shape: Shape = RectangleShape,
+    color: Color = MaterialTheme.colors.surface,
     content: @Composable () -> Unit
 ) = with(config) {
     var dragAmount by remember { mutableStateOf(0f) }
@@ -79,10 +86,11 @@ fun SwipeableCard(
         elevation = animateDpAsState(
             targetValue = if (displayOffset != 0f) elevationWhenRevealed else 0.dp,
             animationSpec = tween(durationMillis = ANIMATION_DURATION)
-        ).value
-    ) {
-        content()
-    }
+        ).value,
+        shape = shape,
+        color = color,
+        content = content,
+    )
 }
 
 private fun log(message: String) {
