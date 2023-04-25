@@ -3,10 +3,13 @@ package com.pseudoankit.swipeable_card
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
-import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -88,6 +91,33 @@ fun SwipeableCard(
     )
 }
 
-private fun log(message: String) {
-    println("SwipeableCardLogs : $message")
+@Composable
+fun PreviewSwipeableView() {
+    SwipeableCardConfig.Direction.values().forEach { direction ->
+        SwipeableCard(
+            config = SwipeableCardConfig(
+                direction = direction,
+                maxOffsetToReveal = 200f,
+                revealThreshold = 50f
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp),
+            color = Color.Blue,
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = direction.dipsplayName, color = Color.White)
+            }
+        }
+    }
 }
+
+private val SwipeableCardConfig.Direction.dipsplayName
+    get() = when (this) {
+        SwipeableCardConfig.Direction.RTL -> "Right to Left"
+        SwipeableCardConfig.Direction.LTR -> "Left to Right"
+    }
