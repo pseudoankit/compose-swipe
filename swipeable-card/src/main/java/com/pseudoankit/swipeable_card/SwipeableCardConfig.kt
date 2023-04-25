@@ -2,6 +2,7 @@ package com.pseudoankit.swipeable_card
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.pseudoankit.swipeable_card.SwipeableCardConfig.Direction
 
 /**
  * config for [SwipeableCard]
@@ -14,7 +15,7 @@ import androidx.compose.ui.unit.dp
  */
 data class SwipeableCardConfig(
     val direction: Direction,
-    val maxOffsetToReveal: Float,
+    private val maxOffsetToReveal: Float,
     val revealThreshold: Float,
     val offsetValue: Float = 0f,
     val elevationWhenRevealed: Dp = 8.dp,
@@ -28,4 +29,10 @@ data class SwipeableCardConfig(
         /** Left to Right */
         LTR
     }
+
+    val maximumOffsetToReveal
+        get() = when (direction) {
+            Direction.RTL -> -maxOffsetToReveal
+            Direction.LTR -> maxOffsetToReveal
+        }
 }

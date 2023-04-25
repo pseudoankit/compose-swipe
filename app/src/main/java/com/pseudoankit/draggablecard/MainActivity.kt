@@ -3,9 +3,7 @@ package com.pseudoankit.draggablecard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,10 +24,12 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    Column(modifier = Modifier.fillMaxSize().padding(12.dp)) {
+                    Column(modifier = Modifier
+                        .fillMaxSize()
+                        .padding(12.dp)) {
                         SwipeableCard(
                             config = SwipeableCardConfig(
-                                direction = SwipeableCardConfig.Direction.LTR,
+                                direction = SwipeableCardConfig.Direction.RTL,
                                 maxOffsetToReveal = 200f,
                                 revealThreshold = 50f
                             ),
