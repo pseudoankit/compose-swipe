@@ -11,7 +11,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.pseudoankit.draggablecard.ui.theme.DraggableCardTheme
-import com.pseudoankit.swipeable_card.PreviewSwipeableView
+import com.pseudoankit.swipeable_card.SwipeableCardPreview
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                             .padding(12.dp),
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        PreviewSwipeableView()
+                        SwipeableCardPreview()
                     }
                 }
             }

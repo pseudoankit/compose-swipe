@@ -2,18 +2,16 @@ package com.pseudoankit.swipeable_card
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
@@ -28,13 +26,15 @@ private const val ANIMATION_DURATION = 500
  * wrapper to create a swipeable view
  * @param config [SwipeableCardConfig] configurations of swipeable view
  * @param content actual content inside the view
+ * to disable default elevation can pass [SwipeableCardConfig.elevationWhenRevealed] as 0.dp
  */
 @Composable
 fun SwipeableCard(
     config: SwipeableCardConfig,
     modifier: Modifier = Modifier,
-    shape: Shape = RectangleShape,
+    shape: Shape = RoundedCornerShape(16.dp),
     color: Color = MaterialTheme.colors.surface,
+    border: BorderStroke? = null,
     content: @Composable () -> Unit
 ) = with(config) {
     var dragAmount by remember { mutableStateOf(0f) }
@@ -88,36 +88,6 @@ fun SwipeableCard(
         shape = shape,
         color = color,
         content = content,
+        border = border
     )
 }
-
-@Composable
-fun PreviewSwipeableView() {
-    SwipeableCardConfig.Direction.values().forEach { direction ->
-        SwipeableCard(
-            config = SwipeableCardConfig(
-                direction = direction,
-                maxOffsetToReveal = 200f,
-                revealThreshold = 50f
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-            color = Color.Blue,
-            shape = RoundedCornerShape(12.dp)
-        ) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = direction.dipsplayName, color = Color.White)
-            }
-        }
-    }
-}
-
-private val SwipeableCardConfig.Direction.dipsplayName
-    get() = when (this) {
-        SwipeableCardConfig.Direction.RTL -> "Right to Left"
-        SwipeableCardConfig.Direction.LTR -> "Left to Right"
-    }

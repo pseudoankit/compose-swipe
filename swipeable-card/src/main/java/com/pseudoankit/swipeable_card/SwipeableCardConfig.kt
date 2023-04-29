@@ -30,7 +30,7 @@ data class SwipeableCardConfig(
         LTR
     }
 
-    val maximumOffsetToReveal
+    internal val maximumOffsetToReveal
         get() = when (direction) {
             Direction.RTL -> -maxOffsetToReveal
             Direction.LTR -> maxOffsetToReveal
